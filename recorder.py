@@ -3,18 +3,17 @@ import csv
 from datetime import datetime
 import os
 
-url = "https://query1.finance.yahoo.com/v8/finance/chart/%5ENSEI"
+# Stooq NIFTY API (works on GitHub)
+url = "https://stooq.com/q/l/?s=nifty&i=1"
 
-headers = {
-    "User-Agent": "Mozilla/5.0",
-    "Accept": "application/json"
-}
+response = requests.get(url)
 
-response = requests.get(url, headers=headers)
+text = response.text.strip()
 
-data = response.json()
+# format: SYMBOL,DATE,TIME,OPEN,HIGH,LOW,CLOSE,VOLUME
+parts = text.split(",")
 
-price = data["chart"]["result"][0]["meta"]["regularMarketPrice"]
+price = parts[6]  # CLOSE price
 
 now = datetime.utcnow()
 
