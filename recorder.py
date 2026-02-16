@@ -3,17 +3,17 @@ import csv
 from datetime import datetime
 import os
 
-# Stooq NIFTY API (works on GitHub)
+# Stooq NIFTY API (plain text, no JSON)
 url = "https://stooq.com/q/l/?s=nifty&i=1"
 
 response = requests.get(url)
 
 text = response.text.strip()
 
-# format: SYMBOL,DATE,TIME,OPEN,HIGH,LOW,CLOSE,VOLUME
+# Format: SYMBOL,DATE,TIME,OPEN,HIGH,LOW,CLOSE,VOLUME
 parts = text.split(",")
 
-price = parts[6]  # CLOSE price
+price = parts[6]
 
 now = datetime.utcnow()
 
