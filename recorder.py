@@ -3,10 +3,14 @@ import csv
 from datetime import datetime
 import os
 
-# Yahoo Finance NIFTY API (works on GitHub)
 url = "https://query1.finance.yahoo.com/v8/finance/chart/%5ENSEI"
 
-response = requests.get(url)
+headers = {
+    "User-Agent": "Mozilla/5.0",
+    "Accept": "application/json"
+}
+
+response = requests.get(url, headers=headers)
 
 data = response.json()
 
